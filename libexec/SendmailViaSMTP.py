@@ -47,7 +47,7 @@ import fileinput
 
 import smtplib
 import mimetypes
-from email import Encoders
+from email import Encoders, utils
 from email.MIMEBase import MIMEBase
 from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
@@ -74,13 +74,14 @@ class Mail:
     """docstring for Mail"""
     def __init__(self, subject='', content='', m_from='', m_to='', m_cc=''):
         self.subject = subject
-        self.content = MIMEText(content, 'html', 'utf-8')
+        self.content = MIMEText(content, 'text', 'utf-8')
         self.m_from = m_from
         self.m_to = m_to
         self.m_cc = m_cc
 
         self.body = MIMEMultipart('related')
         self.body['Subject'] = self.subject
+        self.body['Date'] = utils.formatdate(localtime=True)
         self.body['From'] = self.m_from
         self.body['To'] = self.m_to
         self.body.preamble = 'This is a multi-part message in MIME format.'
