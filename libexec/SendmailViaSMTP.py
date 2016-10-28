@@ -74,7 +74,8 @@ class Mail:
     """docstring for Mail"""
     def __init__(self, subject='', content='', m_from='', m_to='', m_cc=''):
         self.subject = subject
-        self.content = MIMEText(content, 'text', 'utf-8')
+        self.content = MIMEText(content, 'html', 'utf-8')
+        self.content_plain = MIMEText(content, 'plain', 'utf-8')
         self.m_from = m_from
         self.m_to = m_to
         self.m_cc = m_cc
@@ -88,6 +89,7 @@ class Mail:
 
         self.alternative = MIMEMultipart('alternative')
         self.body.attach(self.alternative)
+        self.alternative.attach(self.content_plain)
         self.alternative.attach(self.content)
 
     def attach(self, attachments):
