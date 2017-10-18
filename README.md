@@ -9,6 +9,7 @@ file
 
 ```
 $SMTP_HOST$=localhost
+$SMTP_PORT$=25
 $SMTP_USERNAME$=shinken@example.com
 $SMTP_PASSWORD$=myP@ssW0rd
 $SMTP_SENDER_EMAIL$=monitoring@example.com
